@@ -104,7 +104,7 @@ trivy_tmp_dir="$(mktemp -d -p "$PROJECT_ROOT")"
 trap 'rm -rf "$tmp_dir" "$trivy_tmp_dir"' EXIT
 
 for image in "${IMAGES[@]}"; do
-  image_ref="codercom/enterprise-${image}:${TAG}"
+  image_ref="jatcod3r/enterprise-${image}:${TAG}"
   image_name="${image}-${TAG}"
   output="${tmp_dir}/${image}-${TAG}.sarif"
 

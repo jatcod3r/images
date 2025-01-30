@@ -92,7 +92,7 @@ date_str=$(date --utc +%Y%m%d)
 for image in "${IMAGES[@]}"; do
   image_dir="$PROJECT_ROOT/images/$image"
   image_file="${TAG}.Dockerfile"
-  image_ref="codercom/enterprise-$image:$TAG"
+  image_ref="jatcod3r/enterprise-$image:$TAG"
   image_ref_date="${image_ref}-${date_str}"
   image_path="$image_dir/$image_file"
 

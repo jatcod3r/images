@@ -9,18 +9,18 @@ on:
     branches:
       - main
 
-  schedule:
-    # Re-build all images at 2am UTC every Monday (8pm CST/9pm CDT)
-    #
-    # This ensures we always start with a recent base image, which
-    # reduces wasted space due to written-over files in the writable
-    # layer, ensures packages are up-to-date (since many of these
-    # images install the latest versions of packages available at
-    # build time), and allow us to ensure that images continue to
-    # be buildable from source (no removed packages).
-    #
-    # See: https://crontab.guru/#0_2_*_*_1
-    - cron: "0 2 * * 1"
+  # schedule:
+  #   # Re-build all images at 2am UTC every Monday (8pm CST/9pm CDT)
+  #   #
+  #   # This ensures we always start with a recent base image, which
+  #   # reduces wasted space due to written-over files in the writable
+  #   # layer, ensures packages are up-to-date (since many of these
+  #   # images install the latest versions of packages available at
+  #   # build time), and allow us to ensure that images continue to
+  #   # be buildable from source (no removed packages).
+  #   #
+  #   # See: https://crontab.guru/#0_2_*_*_1
+  #   - cron: "0 2 * * 1"
 
   workflow_dispatch:
 
@@ -75,12 +75,12 @@ jobs:
       - name: Build ubuntu images
         run: |
           ${{ github.workspace }}/scripts/build_images.sh \
-            --tag=ubuntu
+            --tag=ubuntu-noble
 
       - name: Scan ubuntu images
         run: |
           ${{ github.workspace }}/scripts/scan_images.sh \
-            --tag=ubuntu \
+            --tag=ubuntu-noble \
             --output-file=trivy-results-ubuntu.sarif
 
       - name: Upload Trivy scan results to GitHub Security tab
@@ -107,4 +107,4 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           ${{ github.workspace }}/scripts/push_images.sh \
-            --tag=ubuntu
+            --tag=ubuntu-noble
